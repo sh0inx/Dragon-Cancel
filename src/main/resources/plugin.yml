@@ -1,0 +1,11 @@
+name: DragonCancel
+version: ${version}
+description: Here Be No Dragons
+main: io.github.sh0inx.dragoncancellite.DragonCancelLite
+api-version: '1.20'
+author: sh0inx
+load: STARTUP
+commands:
+  dragonCancel:
+    aliases: [ "dragonCancel", dc ]
+    description: Main plugin command
