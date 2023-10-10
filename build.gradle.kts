@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "io.github.sh0inx"
-version = "1.0"
+version = "1.1"
 description = "DragonCancel"
 
 repositories {
@@ -40,7 +40,7 @@ tasks {
 
         relocate("org.bstats")
         relocate("com.iridium")
-        relocate("de.tr7zw")
+        relocate("de.tr7zw.changeme.nbtapi")
 
 
         minimize()

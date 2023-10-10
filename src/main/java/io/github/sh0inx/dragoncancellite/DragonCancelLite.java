@@ -124,6 +124,9 @@ public class DragonCancelLite extends JavaPlugin {
             case PREFIXPLUGINNAME:  {
                 return prefixPluginName;
             }
+            case PREFIXINSIGNIA: {
+                return prefixInsignia;
+            }
             case MESSAGEPREFIX:  {
                 return messagePrefix;
             }

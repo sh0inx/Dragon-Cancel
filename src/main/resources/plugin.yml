@@ -1,5 +1,5 @@
 name: DragonCancel
-version: 1.0
+version: 1.1
 description: Here Be No Dragons
 main: io.github.sh0inx.dragoncancellite.DragonCancelLite
 api-version: '1.13'

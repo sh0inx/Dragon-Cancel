@@ -27,9 +27,9 @@ public class CommandManager implements CommandExecutor{
                 try {
                     switch(args[0].toLowerCase()) {
                         case "about": {
-                            aboutCommand.onCommand(sender, command, s, args);
                         }
                         case "info": {
+                            aboutCommand.onCommand(sender, command, s, args);
                             break;
                         }
                         case "check": {
