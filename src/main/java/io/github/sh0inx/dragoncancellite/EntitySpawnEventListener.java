@@ -1,6 +1,5 @@
 package io.github.sh0inx.dragoncancellite;
 
-import org.bukkit.World;
 import org.bukkit.entity.EnderDragon;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

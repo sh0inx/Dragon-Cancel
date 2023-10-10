@@ -22,17 +22,25 @@ public class CommandManager implements CommandExecutor{
     public boolean onCommand(CommandSender sender, Command command, String s, String[] args) {
 
         try {
-            if(args[0] != null || args[0].length() != 0) {
+            if(args[0] != null || !args[0].isEmpty()) {
 
                 try {
                     switch(args[0].toLowerCase()) {
-                        case "about", "info" ->
-                                aboutCommand.onCommand(sender, command, s, args);
-                        case "check" ->
-                                checkCommand.onCommand(sender, command, s, args);
-                        case "help" ->
-                                helpCommand.onCommand(sender, command, s, args);
-                        default -> {
+                        case "about": {
+                            aboutCommand.onCommand(sender, command, s, args);
+                        }
+                        case "info": {
+                            break;
+                        }
+                        case "check": {
+                            checkCommand.onCommand(sender, command, s, args);
+                            break;
+                        }
+                        case "help": {
+                            helpCommand.onCommand(sender, command, s, args);
+                            break;
+                        }
+                        default: {
                             sender.sendMessage(IridiumColorAPI.process(
                                     DragonCancelLite.getInstance().getSubString(Substring.MESSAGEPREFIX)
                                             + DragonCancelLite.getInstance().getSubString(Substring.HIGHLIGHTCOLOR)

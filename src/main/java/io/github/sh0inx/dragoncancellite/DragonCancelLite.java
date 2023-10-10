@@ -85,24 +85,55 @@ public class DragonCancelLite extends JavaPlugin {
                         + lowLightColor + " }--";
         String consoleDecorator = "*+*+*+**+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*";
 
-        return switch (selection) {
-            case HEXCOLORBRIGHT -> hexColorBright;
-            case HEXCOLORDARK -> hexColorDark;
-            case HIGHLIGHTCOLOR -> highlightColor;
-            case LOWLIGHTCOLOR -> lowLightColor;
-            case DRAGONCANCEL -> dragonCancel;
-            case DRAGON -> dragon;
-            case CANCEL -> cancel;
-            case TITLEPREFIX -> titleprefix;
-            case TITLESUFFIX -> titlesuffix;
-            case PREFIXPLUGINNAME -> prefixPluginName;
-            case PREFIXINSIGNIA -> prefixInsignia;
-            case MESSAGEPREFIX -> messagePrefix;
-            case DRAGONCANCELTITLE -> dragonCancelTitle;
-            case DRAGONCANCELSUBTITLE -> dragonCancelSubTitle;
-            case CONSOLEDECORATOR -> consoleDecorator;
-            default -> "[invalid string call \"" + selection + "\"]";
-        };
+        String reponse = null;
+
+        switch (selection) {
+            case HEXCOLORBRIGHT:  {
+                return hexColorBright;
+            }
+            case HEXCOLORDARK:  {
+                return hexColorDark;
+            }
+            case HIGHLIGHTCOLOR:  {
+                return highlightColor;
+            }
+            case LOWLIGHTCOLOR:  {
+                return lowLightColor;
+            }
+            case DRAGONCANCEL:  {
+                return dragonCancel;
+            }
+            case DRAGON:  {
+                return dragon;
+            }
+            case CANCEL:  {
+                return cancel;
+            }
+            case DRAGONCANCELTITLE: {
+                return dragonCancelTitle;
+            }
+            case DRAGONCANCELSUBTITLE: {
+                return dragonCancelSubTitle;
+            }
+            case TITLEPREFIX:  {
+                return titleprefix;
+            }
+            case TITLESUFFIX:  {
+                return titlesuffix;
+            }
+            case PREFIXPLUGINNAME:  {
+                return prefixPluginName;
+            }
+            case MESSAGEPREFIX:  {
+                return messagePrefix;
+            }
+            case CONSOLEDECORATOR:  {
+                return consoleDecorator;
+            }
+            default: {
+                return "[invalid string call \"" + selection + "\"]";
+            }
+        }
     }
 
     private void editLevelData(String world) throws IOException {
