@@ -18,6 +18,8 @@ jobs:
         cache: gradle
     - name: Grant execute permission for gradle
       run: chmod +x gradlew
+    - name: Gradle Wrapper
+      run: ./gradle wrapper
     - name: Build with Gradle
       run: ./gradlew build
     - name: Upload artifacts
@@ -39,3 +41,19 @@ jobs:
         with:
           name: "DragonCancel"
           path: "./"
+  release:
+    if: |
+      "contains(github.event.commits[0].message, 'release')"
+      && "github.ref == 'refs/heads/master'"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Build Changelog
+        id: github_release
+        uses: mikepenz/release-changelog-builder-action@v3
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create Release
+        uses: mikepenz/action-gh-release@v0.2.0-a03 #softprops/action-gh-release
+        with:
+          body: ${{steps.github_release.outputs.changelog}}
