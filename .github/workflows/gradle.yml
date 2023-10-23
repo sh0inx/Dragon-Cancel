@@ -44,7 +44,7 @@ jobs:
   release:
     if: |
       contains(github.event.commits[0].message, 'release')
-      && "github.ref == 'refs/heads/main'"
+      && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
       - name: Build Changelog
