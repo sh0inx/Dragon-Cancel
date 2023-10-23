@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "io.github.sh0inx"
-version = "1.1"
+version = "1.1.1"
 description = "DragonCancel"
 
 repositories {
@@ -30,6 +30,19 @@ tasks {
     jar {
         dependsOn("shadowJar")
         enabled = false
+    }
+
+    compileJava {
+        sourceCompatibility = JavaVersion.VERSION_1_8.toString()
+        targetCompatibility = JavaVersion.VERSION_1_8.toString()
+    }
+
+    processResources {
+        filesMatching("**/plugin.yml") {
+            expand(rootProject.project.properties)
+        }
+
+        outputs.upToDateWhen { false }
     }
 
     shadowJar {

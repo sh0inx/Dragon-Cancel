@@ -31,7 +31,7 @@ public class AboutCommand implements CommandExecutor {
                 DragonCancelLite.getInstance().getInstance().getSubString(Substring.LOWLIGHTCOLOR)
                         + "Modrinth Page: "
                         + DragonCancelLite.getInstance().getSubString(Substring.HIGHLIGHTCOLOR)
-                        + "[placeholder]"));
+                        + "https://modrinth.com/plugin/dragon-cancel"));
         return true;
     }
 }
