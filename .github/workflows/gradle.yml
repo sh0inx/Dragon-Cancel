@@ -34,10 +34,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/upload-artifact@v3.1.3
-        id: version
-        with:
-          file: "build.gradle.kts"
-      - uses: actions/upload-artifact@v3.1.3
         with:
           name: "DragonCancel"
           path: "build/libs/dragonCancel-*.jar"
