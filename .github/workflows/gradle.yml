@@ -28,7 +28,7 @@ jobs:
       uses: actions/upload-artifact@v3.1.3
       with:
         name: "DragonCancel"
-        path: "build/libs/dragonCancel-*.jar"
+        path: "build/libs/dragonCancelLite-*.jar"
   upload:
     needs: build
     runs-on: ubuntu-latest
@@ -36,7 +36,7 @@ jobs:
       - uses: actions/upload-artifact@v3.1.3
         with:
           name: "DragonCancel"
-          path: "build/libs/dragonCancel-*.jar"
+          path: "build/libs/dragonCancelLite-*.jar"
   release:
     if: |
       contains(github.event.commits[0].message, 'release')
