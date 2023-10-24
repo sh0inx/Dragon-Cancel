@@ -1,4 +1,4 @@
-<img src="https://img.shields.io/liberapay/patrons/sh0inx.svg?logo=liberapay?style=flat"> <img alt="Modrinth Downloads" src="https://img.shields.io/modrinth/dt/dragon-cancel?style=flat">
+<img alt="Liberapay patrons" src="https://img.shields.io/liberapay/patrons/sh0inx?link=https%3A%2F%2Fen.liberapay.com%2Fsh0inx%2F"> <img alt="Modrinth Downloads" src="https://img.shields.io/modrinth/dt/dragon-cancel?label=modrinth&color=17b85a&link=https%3A%2F%2Fmodrinth.com%2Fplugin%2Fdragon-cancel"> <img alt="Spiget Downloads" src="https://img.shields.io/spiget/downloads/113210?label=spigot%20downloads&color=eb8f00&link=https%3A%2F%2Fwww.spigotmc.org%2Fresources%2Fdragon-cancel.113210%2F">
 
 ## Dragon Cancel
 #### #cancelled
