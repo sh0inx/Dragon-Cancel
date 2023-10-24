@@ -34,28 +34,6 @@ jobs:
         name: "DragonCancel"
         path: "build/libs/dragonCancelLite-*.jar"
 
-  nightly:
-    needs: build
-    if: |
-      contains(github.event.commits[0].message, 'beta')
-      || contains(github.event.commits[0].message, 'alpha')
-      || contains(github.event.commits[0].message, 'nightly')
-      && github.ref == 'refs/heads/main'
-    name: Deploy nightly
-    runs-on: ubuntu-latest
-    steps:
-      - name: Nigtly Build Release
-        uses: WebFreak001/deploy-nightly@v2.0.0
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: https://uploads.github.com/repos/sh0inx/Dragon-Cancel/releases/126317560/assets{?name,label}
-          release_id: 126317560
-          asset_path: ./dragonCancelLite-*.jar
-          asset_name: dragonCancelLite-*-$$.jar
-          asset_content_type: application/zip
-          max_releases: 1
-
   release:
     needs: build
     if:   
