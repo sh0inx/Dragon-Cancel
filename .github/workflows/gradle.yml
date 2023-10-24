@@ -8,7 +8,7 @@ jobs:
 
   build:
     runs-on: ubuntu-latest
-    if: "!contains(github.event.commits[0].message, '[ci-skip]')"
+    if: "!contains(github.event.commits[0].message, '#build-skip')"
     steps:
     - uses: actions/checkout@v3.0.0
     - uses: gradle/wrapper-validation-action@v1
@@ -18,11 +18,7 @@ jobs:
         distribution: temurin
         java-version: 8
         cache: gradle
-    - name: Checkout project sources
-      uses: actions/checkout@v3
-    - name: Setup Gradle
-      uses: gradle/gradle-build-action@v2
-    - name: Grant execute permission for gradle
+    - name: Grant execute permission for gradlew
       run: chmod +x gradlew
     - name: Test with Gradle
       run: ./gradlew test
@@ -41,9 +37,30 @@ jobs:
       && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
-      - name: Create Release
-        uses: Kir-Antipov/mc-publish@v3.3
-        with:
-          modrinth-id: 4U7mK5Ez
-          modrinth-token: ${{ secrets.MODRINTH_PAT }}
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+    - uses: actions/checkout@v2
+    - uses: thecodemonkey/action-get-gradle-version@master
+      id: version
+      with:
+        file: "build.gradle.kts"
+    - uses: actions/download-artifact@v3.0.2
+      with:
+        name: "DragonCancel"
+        path: "./"
+    - name: Create Release
+      uses: Kir-Antipov/mc-publish@v3.3
+      with:
+        file: "dragonCancelLite-*.jar"
+        modrinth-id: 4U7mK5Ez
+        dependencies:
+          nbtapi@0.3.0(embedded)
+        loaders: |
+            spigot
+            paper
+            purpur
+        game-versions: |
+            >=1.17
+            1.8.9
+        modrinth-token: ${{ secrets.MODRINTH_PAT }}
+        
+        github-generate-changelog: true
+        github-token: ${{ secrets.GITHUB_TOKEN }}
