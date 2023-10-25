@@ -13,14 +13,14 @@ public class CommandManager extends io.github.sh0inx.heart.managers.CommandManag
     @Override
     public void registerCommands() {
         super.registerCommands();
-        registerCommand(DragonCancel.getInstance().getCommands().aboutCommand);
+        registerCommand(DragonCancel.getInstance().getConfigManager().getCommands().checkCommand);
     }
 
     @Override
     public void noArgsDefault(CommandSender commandSender) {
         if (commandSender instanceof Player) {
             Player player = (Player) commandSender;
-            //Bukkit.getServer().dispatchCommand(commandSender, "is create");
+            //command to run on null args
         }
     }
 }

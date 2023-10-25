@@ -1,4 +1,4 @@
-name: dragonCancel
+name: ${description}
 version: ${version}
 description: Here Be No Dragons
 main: io.github.sh0inx.dragoncancel.DragonCancel

@@ -1,17 +1,8 @@
 package io.github.sh0inx.dragoncancel.config;
 
-import io.github.sh0inx.dragoncancel.commands.AboutCommand;
 import io.github.sh0inx.dragoncancel.commands.CheckCommand;
+import org.checkerframework.checker.units.qual.C;
 
-public class Commands {
-    public AboutCommand aboutCommand;
-    public CheckCommand checkCommand;
-
-    public Commands() {
-        this("dragonCancel", "dragonCancel");
-    }
-
-    public Commands(String permissionBase, String commandBase) {
-
-    }
+public class Commands extends io.github.sh0inx.heart.configs.Commands {
+    public CheckCommand checkCommand = new CheckCommand();
 }

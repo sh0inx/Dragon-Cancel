@@ -6,7 +6,7 @@ plugins {
 
 group = "io.github.sh0inx"
 version = "1.2.0"
-description = "dragonCancel"
+description = "Dragon-Cancel"
 
 repositories {
     mavenCentral()

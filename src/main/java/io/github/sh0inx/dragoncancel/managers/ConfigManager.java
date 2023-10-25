@@ -8,17 +8,37 @@ import io.github.sh0inx.dragoncancel.config.Messages;
 
 public class ConfigManager extends io.github.sh0inx.heart.managers.ConfigManager {
 
-    PluginConfiguration pluginConfiguration = new PluginConfiguration();
-    Commands commands = new Commands();
-    Messages messages = new Messages();
+    PluginConfiguration pluginConfiguration;
+    Commands commands;
+    Messages messages;
 
     public ConfigManager() {
         super();
+        pluginConfiguration = new PluginConfiguration();
+        commands = new Commands();
+        messages = new Messages();
+    }
+
+    @Override
+    public PluginConfiguration getPluginConfiguration() {
+        return pluginConfiguration;
+    }
+
+    @Override
+    public Commands getCommands() {
+        return commands;
+    }
+
+    @Override
+    public Messages getMessages() {
+        return messages;
     }
 
     @Override
     public void initializeConfigs() {
         super.initializeConfigs();
+        loadConfigs();
+        saveConfigs();
     }
 
     @Override
@@ -35,5 +55,10 @@ public class ConfigManager extends io.github.sh0inx.heart.managers.ConfigManager
         DragonCancel.getInstance().getPersist().save(pluginConfiguration);
         DragonCancel.getInstance().getPersist().save(messages);
         DragonCancel.getInstance().getPersist().save(commands);
+    }
+
+    @Override
+    public void reloadConfig() {
+        loadConfigs();
     }
 }

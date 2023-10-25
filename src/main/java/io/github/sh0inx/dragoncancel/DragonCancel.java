@@ -1,14 +1,11 @@
 package io.github.sh0inx.dragoncancel;
 
-import io.github.sh0inx.dragoncancel.config.PluginConfiguration;
 import io.github.sh0inx.dragoncancel.listeners.EntitySpawnEventListener;
 import io.github.sh0inx.dragoncancel.managers.CommandManager;
 import io.github.sh0inx.dragoncancel.managers.ConfigManager;
 
 import io.github.sh0inx.heart.Heart;
 import io.github.sh0inx.heart.MessageType;
-import io.github.sh0inx.heart.configs.Commands;
-import io.github.sh0inx.heart.configs.Messages;
 import io.github.sh0inx.heart.managers.versioncheck.ProfileCheck;
 import io.github.sh0inx.heart.managers.versioncheck.UpdateCheck;
 import io.github.sh0inx.heart.managers.versioncheck.VersionCheck;
@@ -29,8 +26,6 @@ import java.nio.file.StandardCopyOption;
 import java.util.Map;
 
 import lombok.Getter;
-import org.bukkit.plugin.PluginDescriptionFile;
-import org.bukkit.plugin.java.JavaPluginLoader;
 
 @Getter
 public class DragonCancel extends Heart {
@@ -39,31 +34,27 @@ public class DragonCancel extends Heart {
 
     private final int bstatsPluginId = 20134;
     private final String modrinthPluginId = "4U7mK5Ez";
-    final Metrics metrics = new Metrics(DragonCancel.getInstance(), bstatsPluginId);
-
-    private PluginConfiguration pluginConfiguration;
-    private Commands commands;
-    private Messages messages;
-
-    private ProfileCheck profileCheck;
-    private UpdateCheck updateCheck;
-    private VersionCheck versionCheck;
 
     private CommandManager commandManager;
     private ConfigManager configManager;
 
-    public DragonCancel(JavaPluginLoader loader, PluginDescriptionFile description, File dataFolder, File file) {
-        super(loader, description, dataFolder, file);
-        instance = this;
+    @Override
+    public UpdateCheck getUpdateCheck() {
+        return new UpdateCheck();
+    }
+
+    @Override
+    public VersionCheck getVersionCheck() {
+        return new VersionCheck();
+    }
+
+    @Override
+    public ProfileCheck getProfileCheck() {
+        return new ProfileCheck();
     }
 
     public DragonCancel () {
         instance = this;
-    }
-
-    @Override
-    public void onLoad() {
-        super.onLoad();
     }
 
     @Override
@@ -72,11 +63,10 @@ public class DragonCancel extends Heart {
 
         registerListeners();
         initializeManagers();
+        super.onEnable();
         consoleMessage(MessageType.ENABLE);
-        startUpdateCheck();
 
         for(Map.Entry<String, Boolean> world : getWorldsToCancel().entrySet()) {
-
             try {
                 if(world.getKey().isEmpty()) {
                     getLogger().warning("config.yml needs world names to continue, restart server with config.yml populated with world names");
@@ -87,13 +77,10 @@ public class DragonCancel extends Heart {
                 throw new RuntimeException(e);
             }
         }
-
-        super.onEnable();
     }
 
     @Override
     public void onDisable() {
-        metrics.shutdown();
     }
 
     @Override
@@ -107,98 +94,14 @@ public class DragonCancel extends Heart {
     }
 
     public Map<String, Boolean> getWorldsToCancel() {
-        return DragonCancel.getInstance().pluginConfiguration.worlds;
-    }
-
-    public String getSubString(Substring selection) {
-
-        String hexColorBright = "F3C5FF";
-        String hexColorDark = "592463";
-        String highlightColor = "<SOLID:" + hexColorBright + ">";
-        String lowLightColor = "<SOLID:" + hexColorDark + ">";
-        String dragonCancel = DragonCancel.getInstance().getDescription().getName();
-        String dragon = dragonCancel.substring(0,6);
-        String cancel = dragonCancel.substring(6,12);
-        String titleprefix = "*+*+*+ ";
-        String titlesuffix = " +*+*+*";
-        String prefixPluginName = "<GRADIENT:" + hexColorDark + ">" + dragonCancel + "</GRADIENT:" + hexColorBright + ">";
-        String prefixInsignia = "&8}";
-        String messagePrefix = prefixPluginName + " " + prefixInsignia + " ";
-        String dragonCancelTitle =
-                "<GRADIENT:" + hexColorDark + ">"
-                        + titleprefix
-                        + dragon
-                        + "</GRADIENT:" + hexColorBright + ">"
-                        + "<GRADIENT:" + hexColorBright + ">"
-                        + cancel
-                        + titlesuffix
-                        + "</GRADIENT:" + hexColorDark + ">";
-        String dragonCancelSubTitle =
-                lowLightColor + "--{ "
-                        + highlightColor + "&oHere be &nno"
-                        + highlightColor + "&o dragons.&r"
-                        + lowLightColor + " }--";
-        String consoleDecorator = "*+*+*+**+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*";
-
-        String reponse = null;
-
-        switch (selection) {
-            case HEXCOLORBRIGHT:  {
-                return hexColorBright;
-            }
-            case HEXCOLORDARK:  {
-                return hexColorDark;
-            }
-            case HIGHLIGHTCOLOR:  {
-                return highlightColor;
-            }
-            case LOWLIGHTCOLOR:  {
-                return lowLightColor;
-            }
-            case DRAGONCANCEL:  {
-                return dragonCancel;
-            }
-            case DRAGON:  {
-                return dragon;
-            }
-            case CANCEL:  {
-                return cancel;
-            }
-            case DRAGONCANCELTITLE: {
-                return dragonCancelTitle;
-            }
-            case DRAGONCANCELSUBTITLE: {
-                return dragonCancelSubTitle;
-            }
-            case TITLEPREFIX:  {
-                return titleprefix;
-            }
-            case TITLESUFFIX:  {
-                return titlesuffix;
-            }
-            case PREFIXPLUGINNAME:  {
-                return prefixPluginName;
-            }
-            case PREFIXINSIGNIA: {
-                return prefixInsignia;
-            }
-            case MESSAGEPREFIX:  {
-                return messagePrefix;
-            }
-            case CONSOLEDECORATOR:  {
-                return consoleDecorator;
-            }
-            default: {
-                return "[invalid string call \"" + selection + "\"]";
-            }
-        }
+        return DragonCancel.getInstance().getConfigManager().getPluginConfiguration().worlds;
     }
 
     private void editLevelData(String world) throws IOException {
 
         if(!backupWorld(world, "backupWorlds")) {
             getLogger().warning(
-                    IridiumColorAPI.process(DragonCancel.getInstance().getSubString(Substring.CONSOLEDECORATOR)));
+                    IridiumColorAPI.process(DragonCancel.getInstance().getConfigManager().getMessages().consoleDecorator));
 
             getLogger().warning("Not editing \"" + world + "\" because backup failed.");
             getLogger().warning("Restart server with valid config and EXISTING world you want to dragon cancel.");
@@ -206,7 +109,7 @@ public class DragonCancel extends Heart {
             getLogger().warning("If \"" + world + "\" already existed, see previous error/stacktrace.");
 
             getLogger().warning(
-                    IridiumColorAPI.process(DragonCancel.getInstance().getSubString(Substring.CONSOLEDECORATOR)));
+                    IridiumColorAPI.process(DragonCancel.getInstance().getConfigManager().getMessages().consoleDecorator));
             return;
         }
 
@@ -260,6 +163,10 @@ public class DragonCancel extends Heart {
 
         getLogger().info("Backup successful, check " + backupFolder.getPath() + ".");
         return true;
+    }
+
+    public void addBstats(int bstatsPluginID) {
+        new Metrics(this, bstatsPluginID);
     }
 
     public static DragonCancel getInstance() {
