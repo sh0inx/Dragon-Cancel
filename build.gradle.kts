@@ -5,25 +5,28 @@ plugins {
 }
 
 group = "io.github.sh0inx"
-version = "1.1.1"
-description = "DragonCancel"
+version = "1.2.0"
+description = "dragonCancel"
 
 repositories {
     mavenCentral()
     maven("https://hub.spigotmc.org/nexus/content/repositories/snapshots/")
     maven("https://nexus.iridiumdevelopment.net/repository/maven-releases/")
-    maven("https://repo.codemc.org/repository/maven-public/")
-
+    maven("https://repo.codemc.io/repository/maven-public/")
 }
 
 dependencies {
+
+    implementation(files("/build/depend/Heart-1.0.jar"))
 
     implementation("org.bstats:bstats-bukkit:3.0.2")
     implementation("com.iridium:IridiumColorAPI:1.0.6")
     implementation("de.tr7zw:item-nbt-api:2.12.0")
 
-    compileOnly("org.spigotmc:spigot-api:1.19.4-R0.1-SNAPSHOT")
+    annotationProcessor("org.projectlombok:lombok:1.18.26")
 
+    compileOnly("org.projectlombok:lombok:1.18.26")
+    compileOnly("org.spigotmc:spigot-api:1.19.4-R0.1-SNAPSHOT")
 }
 
 tasks {
@@ -55,7 +58,7 @@ tasks {
         relocate("com.iridium")
         relocate("de.tr7zw.changeme.nbtapi")
 
-
         minimize()
     }
 }
+

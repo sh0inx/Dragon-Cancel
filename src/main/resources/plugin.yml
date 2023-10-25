@@ -1,7 +1,7 @@
-name: DragonCancel
+name: dragonCancel
 version: ${version}
 description: Here Be No Dragons
-main: io.github.sh0inx.dragoncancellite.DragonCancelLite
+main: io.github.sh0inx.dragoncancel.DragonCancel
 author: sh0inx
 load: STARTUP
 commands:
